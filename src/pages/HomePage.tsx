@@ -1,13 +1,22 @@
 import { motion } from 'framer-motion'
 import { PriceChart } from '../components/common/PriceChart'
 import { FAQ } from '../components/common/FAQ'
-import { Shield, Zap, Target, Users, CheckCircle2, MessageSquare, Twitter, Github } from 'lucide-react'
+import { YieldCalculator } from '../components/dashboard/YieldCalculator'
+import { LiveTicker } from '../components/dashboard/LiveTicker'
+import { Shield, Zap, Target, Users, CheckCircle2, MessageSquare, Twitter, Github, TrendingUp, Activity, BarChart3, Database } from 'lucide-react'
 
 const FEATURES = [
   { icon: Shield, title: 'Audited Security', desc: 'Enterprise-grade smart contract architecture.' },
   { icon: Zap, title: 'Lightning Fast', desc: 'Built for high-frequency transactions.' },
   { icon: Target, title: 'Predictive ROI', desc: 'AI-driven analytics dashboard.' },
   { icon: Users, title: 'Governance', desc: 'True decentralization for holders.' },
+]
+
+const MARKET_STATS = [
+  { label: 'Total Value Locked', value: '$84.2M', icon: Database },
+  { label: '24h Trading Volume', value: '$12.4M', icon: Activity },
+  { label: 'Current APY', value: '110.5%', icon: TrendingUp },
+  { label: 'Circulating Supply', value: '420M IVO', icon: BarChart3 },
 ]
 
 const ROADMAP = [
@@ -26,7 +35,7 @@ const HomePage = () => {
       <section className="text-center space-y-8 relative">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-96 bg-blue-500/10 rounded-full blur-[120px]" />
         <motion.div variants={itemVariants} className="bg-primary/10 border border-primary/20 px-6 py-2 rounded-full inline-block mb-8 text-primary font-bold uppercase text-sm tracking-widest">
-          The Future of Institutional DeFi
+          The Future of Institutional Finance
         </motion.div>
         
         <motion.h1 variants={itemVariants} className="text-7xl md:text-[120px] font-extrabold tracking-tighter leading-none mb-8">
@@ -43,21 +52,35 @@ const HomePage = () => {
         </motion.div>
       </section>
 
-      {/* Bento Grid */}
+      {/* Market Stats Bar */}
+      <section className="container mx-auto grid grid-cols-2 md:grid-cols-4 gap-4">
+        {MARKET_STATS.map((stat, i) => (
+          <motion.div key={i} variants={itemVariants} className="glass-card p-6 flex flex-col items-center justify-center text-center">
+            <stat.icon className="text-primary mb-3" size={24} />
+            <h4 className="text-foreground-muted text-sm uppercase tracking-wider">{stat.label}</h4>
+            <span className="text-2xl font-bold mt-1">{stat.value}</span>
+          </motion.div>
+        ))}
+      </section>
+
+      {/* Interactive Bento Grid */}
       <section className="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
         <motion.div variants={itemVariants} className="md:col-span-2 glass-card p-10 border-l-4 border-l-blue-500">
-          <h3 className="text-3xl font-bold mb-8">Live Token Performance</h3>
+          <div className="flex justify-between items-center mb-8">
+            <h3 className="text-3xl font-bold">Live Token Performance</h3>
+            <span className="text-secondary bg-secondary/10 px-3 py-1 rounded text-xs font-bold uppercase animate-pulse">Live</span>
+          </div>
           <PriceChart />
         </motion.div>
         
-        <motion.div variants={itemVariants} className="glass-card p-10 border border-white/5 flex flex-col justify-center">
-          <h3 className="text-2xl font-bold mb-6">Quick Swap</h3>
-          <div className="space-y-4">
-            <input className="w-full bg-background/50 p-5 rounded-2xl border border-white/10" placeholder="0.00 ETH" />
-            <input className="w-full bg-background/50 p-5 rounded-2xl border border-white/10" placeholder="0.00 IVO" />
-            <button className="w-full btn-primary !py-5">Execute Swap</button>
-          </div>
-        </motion.div>
+        <div className="space-y-6">
+          <motion.div variants={itemVariants}>
+            <YieldCalculator />
+          </motion.div>
+          <motion.div variants={itemVariants}>
+            <LiveTicker />
+          </motion.div>
+        </div>
 
         {FEATURES.map((f, i) => (
           <motion.div key={i} variants={itemVariants} className="glass-card p-6 border border-white/10 flex items-center gap-4 hover:bg-white/5 transition-colors">

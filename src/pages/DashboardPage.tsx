@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
-import { Wallet, PieChart, ArrowUpRight, ArrowDownRight, RefreshCw, History } from 'lucide-react'
+import { Wallet, PieChart, RefreshCw, History } from 'lucide-react'
+import { PortfolioCharts } from '../components/dashboard/PortfolioCharts'
 
 const STATS = [
   { label: 'Total Portfolio Value', value: '$124,592.00', icon: Wallet, change: '+12.5%' },
@@ -15,21 +16,18 @@ const HISTORY = [
 
 const DashboardPage = () => {
   return (
-    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="container mx-auto px-4 py-20">
+    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="container mx-auto px-4 py-20 space-y-8">
       <div className="mb-12">
         <h1 className="text-5xl font-extrabold mb-2">Investor Dashboard</h1>
         <p className="text-foreground-muted">Overview of your IVO ecosystem engagement.</p>
       </div>
 
-      {/* Stats Grid */}
-      <div className="grid md:grid-cols-3 gap-6 mb-12">
+      <div className="grid md:grid-cols-3 gap-6">
         {STATS.map((stat, i) => (
           <div key={i} className="glass-card p-8 border border-white/10 hover:border-primary/50 transition-all">
             <div className="flex justify-between items-start mb-4">
               <stat.icon className="text-primary" size={28} />
-              <span className={`text-xs font-bold px-2 py-1 rounded ${stat.change === 'Active' ? 'bg-secondary/20 text-secondary' : 'text-primary'}`}>
-                {stat.change}
-              </span>
+              <span className="text-xs font-bold px-2 py-1 rounded bg-secondary/20 text-secondary">{stat.change}</span>
             </div>
             <h3 className="text-foreground-muted text-sm mb-1">{stat.label}</h3>
             <p className="text-3xl font-extrabold">{stat.value}</p>
@@ -37,12 +35,10 @@ const DashboardPage = () => {
         ))}
       </div>
 
-      {/* History Table */}
+      <PortfolioCharts />
+
       <div className="glass-card p-8 border border-white/10">
-        <div className="flex items-center gap-3 mb-8">
-          <History className="text-primary" />
-          <h2 className="text-2xl font-bold">Transaction History</h2>
-        </div>
+        <h2 className="text-2xl font-bold mb-8">Transaction History</h2>
         <table className="w-full text-left">
           <thead>
             <tr className="text-foreground-muted border-b border-white/10">

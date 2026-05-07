@@ -10,7 +10,7 @@ const Footer = () => {
             <div className="w-8 h-8 bg-ivo-gradient rounded-lg flex items-center justify-center font-bold">I</div>
             IVO
           </Link>
-          <p className="text-foreground-muted text-sm">Institutional-grade DeFi ecosystem. Built for transparency, speed, and long-term yield.</p>
+          <p className="text-foreground-muted text-sm">Institutional-grade IVO ecosystem. Built for transparency, speed, and long-term yield.</p>
         </div>
         
         <div>
